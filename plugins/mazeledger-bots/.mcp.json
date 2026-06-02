@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "mazeledger-bots": {
+      "type": "http",
+      "url": "${CLAUDE_PLUGIN_OPTION_base_url}/api/v1/mcp",
+      "headers": {
+        "x-api-key": "${CLAUDE_PLUGIN_OPTION_api_key}"
+      }
+    }
+  }
+}

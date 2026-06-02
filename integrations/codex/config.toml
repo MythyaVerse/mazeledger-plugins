@@ -1,0 +1,9 @@
+# MazeLedger Bots — Codex MCP server.
+# Add this to ~/.codex/config.toml (global) or .codex/config.toml (trusted project).
+# Codex HTTP MCP authenticates with Authorization: Bearer <env var>. The MazeLedger
+# MCP accepts the org API key via Bearer (or x-api-key). Set MAZELEDGER_API_KEY first:
+#   export MAZELEDGER_API_KEY="ml_test_…"   # sandbox; or ml_live_… for real orders
+
+[mcp_servers.mazeledger-bots]
+url = "https://mazeledger.ai/api/v1/mcp"
+bearer_token_env_var = "MAZELEDGER_API_KEY"

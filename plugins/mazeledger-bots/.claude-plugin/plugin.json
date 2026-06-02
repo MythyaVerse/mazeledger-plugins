@@ -1,0 +1,25 @@
+{
+  "name": "mazeledger-bots",
+  "displayName": "MazeLedger Bots",
+  "version": "1.0.0",
+  "description": "Build spot & futures trading bots on ZebPay via the MazeLedger API. Bundles a skill + hosted MCP server so you can onboard, register end-users (BYO keys), and place & manage orders in natural language.",
+  "author": { "name": "MazeLedger", "email": "partners@mazeledger.ai" },
+  "homepage": "https://mazeledger.ai/docs",
+  "license": "MIT",
+  "keywords": ["trading", "bots", "crypto", "futures", "spot", "zebpay", "mcp", "execution"],
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "MazeLedger API Key",
+      "description": "Your MazeLedger org API key — ml_test_… (sandbox, simulated, free) or ml_live_… (real orders). Get one from https://mazeledger.ai/docs.",
+      "sensitive": true,
+      "required": true
+    },
+    "base_url": {
+      "type": "string",
+      "title": "API Base URL",
+      "description": "MazeLedger API base URL. Leave default unless self-hosting.",
+      "default": "https://mazeledger.ai"
+    }
+  }
+}

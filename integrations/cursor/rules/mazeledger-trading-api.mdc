@@ -1,0 +1,59 @@
+---
+description: MazeLedger Bot Trading API — build spot & futures trading bots on ZebPay (execution, risk caps, sandbox). Use for placing/closing orders, onboarding, registering end-users (BYO keys), history & stats.
+alwaysApply: false
+---
+
+# MazeLedger Bot Trading API
+
+Build trading bots that place **spot (INR)** and **futures (USDT-M)** orders on ZebPay. You write the
+bot logic + UI; MazeLedger handles execution, risk caps, idempotency, audit, and a sandbox. Each
+end-user brings their **own ZebPay keys (BYO)** — no custody.
+
+Base URL `https://mazeledger.ai` · Auth header `x-api-key` (`ml_test_…` sandbox or `ml_live_…` live).
+
+The `mazeledger-bots` MCP server (configured in `.cursor/mcp.json`) exposes tools: `list_symbols`,
+`get_account`, `get_positions`, `place_futures_order`, `close_position`. Sandbox keys simulate; live
+keys place real orders.
+
+## Get a key (one-time)
+```
+POST /api/v1/onboarding/organizations { "name": "Acme", "country": "IN" }   -> sandbox key (once)
+POST /api/v1/organizations/{id}/exchange-connections { "apiKey": "...", "apiSecret": "..." }
+POST /api/v1/organizations/{id}/risk-acknowledgment { "acknowledge": true }
+POST /api/v1/organizations/{id}/api-keys { "mode": "live" }                  -> live key
+```
+Set the key as the `MAZELEDGER_API_KEY` env var (referenced by `.cursor/mcp.json`).
+
+## End-users (multi-user bots)
+`POST /api/v1/users { externalUserId, apiKey, apiSecret }` then pass `endUserId` on trading calls.
+`GET /api/v1/users` · `GET/DELETE /api/v1/users/{externalUserId}`.
+
+## Futures (USDT-M)
+```
+POST /api/v1/futures/orders { endUserId?, symbol:"DOGEUSDT", side:"BUY", type:"MARKET",
+  notionalUsd|quantity, leverage, clientOrderId }
+GET  /api/v1/futures/orders/{id} · GET /api/v1/futures/positions?endUserId=
+POST /api/v1/futures/positions/{id}/close?endUserId= · GET /api/v1/futures/account?endUserId=
+GET  /api/v1/exchange/symbols?symbol=DOGEUSDT
+```
+
+## Spot (INR; ₹99 minimum)
+```
+POST /api/v1/spot/orders { endUserId?, symbol:"BTC", side:"buy", amountInr }      // market buy
+POST /api/v1/spot/orders { symbol:"BTC", side:"sell", quantity }                  // market sell
+GET  /api/v1/spot/orders/{id} · GET /api/v1/spot/account
+```
+
+## Reporting
+`GET /api/v1/orders?externalUserId=&status=&limit=` · `GET /api/v1/users/{externalUserId}/orders` ·
+`GET /api/v1/stats` (users, orders total/today, by status, by market).
+
+## Building a bot
+A bot = your logic calling these on a schedule/signal: decide → size (`list_symbols`/`get_account`)
+→ place with a stable `clientOrderId` (idempotent) → track (`get_positions`/`/orders`) → `close_position`.
+Ideas: DCA, grid, TP/SL manager, copy-trading.
+
+## Safety
+Sandbox first. Risk caps per org (order size, leverage, daily notional, open positions) + exchange
+minimums → `422 RISK_CAP_REJECTED`. Idempotency via `clientOrderId`; ambiguous failures recorded
+`unknown` (re-query before retry). BYO keys should be trade-only. Full docs: `https://mazeledger.ai/docs`.
