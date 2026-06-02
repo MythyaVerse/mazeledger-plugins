@@ -1,13 +1,14 @@
 # MazeLedger Plugins
 
 AI-client plugins & integrations for the **MazeLedger Bot Trading API** — build spot & futures
-trading bots on **ZebPay** in natural language. Your AI assistant talks to MazeLedger's hosted MCP
+trading bots in natural language. Your AI assistant talks to MazeLedger's hosted MCP
 server; MazeLedger handles execution, risk caps, idempotency, audit, and a free sandbox. Each
 end-user brings their **own ZebPay API keys (BYO)** — MazeLedger never custodies funds.
 
 - **API base:** https://mazeledger.ai · **Docs:** https://mazeledger.ai/docs · **OpenAPI:** https://mazeledger.ai/api/openapi
 - **MCP endpoint:** `https://mazeledger.ai/api/v1/mcp` (auth via `x-api-key` or `Authorization: Bearer`)
 - **Keys:** `ml_test_…` (sandbox — simulated, free) or `ml_live_…` (real orders). **Start in sandbox.**
+- **Supported exchange:** ZebPay — spot (INR) + futures (USDT-M); end-users connect their own exchange API keys (BYO).
 
 ## Install
 
@@ -54,4 +55,4 @@ exchange minimums. BYO keys should be **trade-only** (no withdrawal). Idempotenc
 
 ---
 
-License: [MIT](LICENSE) · Support: partners@mazeledger.ai
+License: [MIT](LICENSE) · Support: contact@mazeledger.ai

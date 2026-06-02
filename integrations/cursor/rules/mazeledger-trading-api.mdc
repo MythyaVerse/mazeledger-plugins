@@ -1,11 +1,11 @@
 ---
-description: MazeLedger Bot Trading API — build spot & futures trading bots on ZebPay (execution, risk caps, sandbox). Use for placing/closing orders, onboarding, registering end-users (BYO keys), history & stats.
+description: MazeLedger Bot Trading API — build spot & futures trading bots (execution, risk caps, sandbox). Use for placing/closing orders, onboarding, registering end-users (BYO keys), history & stats.
 alwaysApply: false
 ---
 
 # MazeLedger Bot Trading API
 
-Build trading bots that place **spot (INR)** and **futures (USDT-M)** orders on ZebPay. You write the
+Build trading bots that place **spot (INR)** and **futures (USDT-M)** orders via the MazeLedger API. You write the
 bot logic + UI; MazeLedger handles execution, risk caps, idempotency, audit, and a sandbox. Each
 end-user brings their **own ZebPay keys (BYO)** — no custody.
 

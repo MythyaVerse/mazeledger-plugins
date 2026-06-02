@@ -1,6 +1,6 @@
 # MazeLedger Bots — Cursor integration
 
-Build spot & futures trading bots on ZebPay from Cursor, via the MazeLedger MCP server + a rule.
+Build spot & futures trading bots from Cursor, via the MazeLedger MCP server + a rule.
 
 ## Setup
 

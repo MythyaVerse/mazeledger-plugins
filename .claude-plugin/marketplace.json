@@ -2,14 +2,14 @@
   "name": "mazeledger",
   "owner": {
     "name": "MazeLedger",
-    "email": "partners@mazeledger.ai"
+    "email": "contact@mazeledger.ai"
   },
-  "description": "MazeLedger plugins — build spot & futures trading bots on ZebPay via the MazeLedger API.",
+  "description": "MazeLedger plugins — build spot & futures trading bots via the MazeLedger API.",
   "plugins": [
     {
       "name": "mazeledger-bots",
       "source": "./plugins/mazeledger-bots",
-      "description": "Build spot & futures trading bots on ZebPay via the MazeLedger API. Bundles a skill + hosted MCP server: onboard, register end-users (BYO keys), place & manage orders in natural language.",
+      "description": "Build spot & futures trading bots via the MazeLedger API. Bundles a skill + hosted MCP server: onboard, register end-users (BYO keys), place & manage orders in natural language.",
       "version": "1.0.0",
       "author": { "name": "MazeLedger" }
     }

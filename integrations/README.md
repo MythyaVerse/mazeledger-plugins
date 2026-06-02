@@ -1,6 +1,6 @@
 # MazeLedger Bots — AI client integrations
 
-Build spot & futures trading bots on ZebPay (via the [MazeLedger Bot Trading API](https://mazeledger.ai/docs))
+Build spot & futures trading bots (via the [MazeLedger Bot Trading API](https://mazeledger.ai/docs))
 from any major AI coding client. Each integration = the **MCP server** (`mazeledger-bots`) + an
 **instructions file** (the "skill"). Same API key works across all of them: `ml_test_…` (sandbox,
 simulated, free) or `ml_live_…` (real orders).

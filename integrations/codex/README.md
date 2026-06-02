@@ -1,6 +1,6 @@
 # MazeLedger Bots — Codex (OpenAI Codex CLI) integration
 
-Build spot & futures trading bots on ZebPay from Codex, via the MazeLedger MCP server + AGENTS.md.
+Build spot & futures trading bots from Codex, via the MazeLedger MCP server + AGENTS.md.
 
 ## Setup
 

@@ -1,6 +1,6 @@
 # MazeLedger Bots — Claude Code plugin
 
-Build **spot & futures trading bots** on ZebPay via the [MazeLedger Bot Trading API](https://mazeledger.ai/docs),
+Build **spot & futures trading bots** via the [MazeLedger Bot Trading API](https://mazeledger.ai/docs),
 right from Claude Code. The plugin bundles:
 
 - a **skill** (`mazeledger-trading-api`) — the full API contract + how to build bots, and
@@ -59,4 +59,4 @@ reporting contract.
 
 - The MCP is a remote streamable-HTTP server at `<base_url>/api/v1/mcp` (header `x-api-key`).
 
-Support: partners@mazeledger.ai
+Support: contact@mazeledger.ai

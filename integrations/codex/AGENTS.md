@@ -3,7 +3,7 @@
 > Add this content to your project's `AGENTS.md` (or `~/.codex/AGENTS.md`) so Codex knows how to use
 > the MazeLedger Bot Trading API + the `mazeledger-bots` MCP server.
 
-Build trading bots that place **spot (INR)** and **futures (USDT-M)** orders on ZebPay. You write the
+Build trading bots that place **spot (INR)** and **futures (USDT-M)** orders via the MazeLedger API. You write the
 bot logic; MazeLedger handles execution, risk caps, idempotency, audit, and a sandbox. Each end-user
 brings their **own ZebPay keys (BYO)** — no custody.
 
