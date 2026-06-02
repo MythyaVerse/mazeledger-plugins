@@ -25,5 +25,3 @@ the org key via **either** `x-api-key` **or** `Authorization: Bearer`, so every 
 `list_symbols`, `get_account`, `get_positions`, `place_futures_order`, `close_position`. The
 instructions file adds the full REST contract (spot + futures + onboarding + end-users + reporting).
 
-> All configs use the live base `https://mazeledger.ai`. The MCP server accepts your org key via
-> either `x-api-key` or `Authorization: Bearer`, so every client works.

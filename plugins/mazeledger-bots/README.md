@@ -12,7 +12,7 @@ sandbox. Each end-user brings their **own ZebPay keys (BYO)** — no custody of 
 ## Install
 
 ```bash
-# 1. Add the marketplace (the public plugins repo)
+# 1. Add the marketplace (from the git repo that hosts it)
 /plugin marketplace add MythyaVerse/mazeledger-plugins
 
 # 2. Install the plugin (you'll be prompted for your API key, stored securely)
