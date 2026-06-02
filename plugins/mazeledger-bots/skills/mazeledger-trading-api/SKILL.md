@@ -31,8 +31,16 @@ Don't assume defaults. Gather and confirm these before acting; if any is missing
    - `get_positions` — open positions
    - `place_futures_order` — place a futures order
    - `close_position` — close a position (reduce-only)
+   - `validate_bot` — validate/derive a Strategy Spec from a description (returns spec or questions)
+   - `create_bot` — create a managed bot for an end-user (paper + paused; resume to start)
+   - `list_bots` / `resume_bot` / `pause_bot` — manage bots
    Sandbox keys (`ml_test_…`) simulate; live keys (`ml_live_…`) place real orders.
 2. **This skill** — the full REST contract for everything (incl. spot + onboarding + reporting).
+
+**Managed bots** (`POST /api/v1/bots`, or the `create_bot` tool): create a bot for a registered
+end-user from a natural-language strategy. Created **paper + paused** — `resume` to evaluate
+(simulated). Call `validate_bot` first; it returns the spec or asks for missing details. Autonomous
+live execution is gated separately — see `docs/v4/MANAGED-BOTS.md`.
 
 ## Get an API key (one-time, web session)
 
