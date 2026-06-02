@@ -11,6 +11,18 @@ end-user brings their **own ZebPay API keys (BYO)** — MazeLedger never custodi
 
 Base URL: `https://mazeledger.ai` · Auth: `x-api-key` header.
 
+## Before you build a bot or place a live order — confirm first
+
+Don't assume defaults. Gather and confirm these before acting; if any is missing or ambiguous, **ask the user — do not guess**:
+
+- **Strategy** — what the bot does (DCA, grid, TP/SL manager, signal/copy-trading).
+- **Market** — spot (INR) or futures (USDT-M); symbol(s); leverage (futures).
+- **Trigger** — schedule or signal/webhook, and **whose account** (the org's own key, or a specific `endUserId`).
+- **Sizing & risk** — order size (`notionalUsd` / `quantity` / `amountInr`), and that it fits the org risk caps + exchange **MIN_NOTIONAL**.
+- **Idempotency & exit** — a stable `clientOrderId` per order; how positions are tracked and closed.
+
+**Always start in sandbox (`ml_test_…`). Never place a live order without the user's explicit go-ahead.** The API independently validates hard requirements and rejects bad or over-cap orders (`400` / `422` with a reason) — surface those rejections to the user as the next thing to fix. (`/build-bot` runs this same intake as a guided flow.)
+
 ## This plugin gives you two things
 
 1. **MCP tools** (server `mazeledger-bots`, authed with your configured API key):
