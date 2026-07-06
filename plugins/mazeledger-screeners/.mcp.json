@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "mazeledger-bots": {
+    "mazeledger-screeners": {
       "type": "http",
       "url": "${CLAUDE_PLUGIN_OPTION_base_url}/api/v1/mcp",
       "headers": {

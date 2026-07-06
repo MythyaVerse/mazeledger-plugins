@@ -16,16 +16,16 @@ Screen crypto markets from Cursor, via the MazeLedger MCP server + a rule. Read-
    ```json
    {
      "mcpServers": {
-       "mazeledger-bots": {
+       "mazeledger-screeners": {
          "url": "https://mazeledger.ai/api/v1/mcp",
          "headers": { "x-api-key": "${env:MAZELEDGER_API_KEY}" }
        }
      }
    }
    ```
-   Reload Cursor; the `mazeledger-bots` tools appear in Settings → MCP.
+   Reload Cursor; the `mazeledger-screeners` tools appear in Settings → MCP.
 
-3. **Add the rule (the "skill")**, copy [`rules/mazeledger-trading-api.mdc`](./rules/mazeledger-trading-api.mdc)
+3. **Add the rule (the "skill")**, copy [`rules/mazeledger-screener-api.mdc`](./rules/mazeledger-screener-api.mdc)
    into your project's `.cursor/rules/`. It gives Cursor the full screener API contract.
 
 ## Get a key

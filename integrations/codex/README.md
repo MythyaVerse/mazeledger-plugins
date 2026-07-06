@@ -13,7 +13,7 @@ Screen crypto markets from Codex, via the MazeLedger MCP server + AGENTS.md. Rea
 2. **Add the MCP server**, merge [`config.toml`](./config.toml) into `~/.codex/config.toml`
    (or `.codex/config.toml` in a trusted project):
    ```toml
-   [mcp_servers.mazeledger-bots]
+   [mcp_servers.mazeledger-screeners]
    url = "https://mazeledger.ai/api/v1/mcp"
    bearer_token_env_var = "MAZELEDGER_API_KEY"
    ```
@@ -38,4 +38,4 @@ read the same live data; screeners are read-only either way.
 
 - Codex HTTP MCP supports `bearer_token_env_var` (Authorization: Bearer); the MazeLedger MCP also
   accepts the key via `x-api-key`.
-- `codex mcp login mazeledger-bots` is available if OAuth is added later (not required today).
+- `codex mcp login mazeledger-screeners` is available if OAuth is added later (not required today).

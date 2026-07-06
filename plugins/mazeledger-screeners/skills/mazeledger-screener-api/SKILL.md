@@ -1,5 +1,5 @@
 ---
-name: mazeledger-trading-api
+name: mazeledger-screener-api
 description: Use when screening crypto markets via the MazeLedger Screener API (ZebPay futures + spot). Covers getting an org API key, the self-describing catalog, running the 65 named screeners / the manual builder / raw filters, per-coin futures coverage, the bulk board, natural-language screening, the bundled MCP tools, and the signed push webhook. Read-only (scope market:read); it never trades. Examples: "screen for oversold coins on the daily", "run the futures long-buildup screener", "list every screener", "pull the whole board".
 ---
 
@@ -11,7 +11,7 @@ Base URL: `https://mazeledger.ai`. Auth: `x-api-key` header. Scope: `market:read
 
 ## This plugin gives you two things
 
-1. **MCP tools** (server `mazeledger-bots`, authed with your configured API key):
+1. **MCP tools** (server `mazeledger-screeners`, authed with your configured API key):
    - `list_screeners`, the catalog: 65 named screeners with their parameters
    - `run_screener`, run a named screener, the manual builder, or raw filters
    - `get_screener_universe`, supported coins + per-coin coverage

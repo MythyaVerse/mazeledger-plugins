@@ -3,8 +3,8 @@ description: Screen crypto markets on the MazeLedger Screener API (ZebPay future
 ---
 
 You are helping the user screen crypto markets on the **MazeLedger Screener API** (ZebPay futures +
-spot). Use the `mazeledger-trading-api` skill for the full endpoint/contract reference and the bundled
-`mazeledger-bots` MCP tools (`list_screeners`, `run_screener`, `get_screener_universe`,
+spot). Use the `mazeledger-screener-api` skill for the full endpoint/contract reference and the bundled
+`mazeledger-screeners` MCP tools (`list_screeners`, `run_screener`, `get_screener_universe`,
 `get_screener_board`, `translate_screener`) to run screens as you go. Read-only; never place an order.
 
 Walk the user through, asking only what is needed:

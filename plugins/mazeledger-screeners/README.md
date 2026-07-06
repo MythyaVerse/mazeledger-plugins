@@ -3,8 +3,8 @@
 Screen crypto markets in natural language via the [MazeLedger Screener API](https://mazeledger.ai/docs),
 right from Claude Code. The plugin bundles:
 
-- a **skill** (`mazeledger-trading-api`), the full screener API contract, and
-- a **hosted MCP server** (`mazeledger-bots`), tools to list, run, and explain screeners.
+- a **skill** (`mazeledger-screener-api`), the full screener API contract, and
+- a **hosted MCP server** (`mazeledger-screeners`), tools to list, run, and explain screeners.
 
 65 curated screeners on real ZebPay futures and live spot market data. Read-only (scope market:read);
 it never places a trade.
@@ -16,7 +16,7 @@ it never places a trade.
 /plugin marketplace add MythyaVerse/mazeledger-plugins
 
 # 2. Install the plugin (you will be prompted for your API key, stored securely)
-/plugin install mazeledger-bots@mazeledger
+/plugin install mazeledger-screeners@mazeledger
 ```
 
 When prompted:

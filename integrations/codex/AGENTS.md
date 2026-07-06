@@ -1,12 +1,12 @@
 # MazeLedger Screener API (for Codex)
 
 > Add this content to your project's `AGENTS.md` (or `~/.codex/AGENTS.md`) so Codex knows how to use
-> the MazeLedger Screener API + the `mazeledger-bots` MCP server.
+> the MazeLedger Screener API + the `mazeledger-screeners` MCP server.
 
 Screen crypto markets across 65 curated screeners on real ZebPay futures and live spot market data.
 Read-only (scope `market:read`); it never places a trade.
 
-Base URL `https://mazeledger.ai`. Auth via the `mazeledger-bots` MCP server (configured in
+Base URL `https://mazeledger.ai`. Auth via the `mazeledger-screeners` MCP server (configured in
 `~/.codex/config.toml`, authenticated with `MAZELEDGER_API_KEY`). MCP tools: `list_screeners`,
 `run_screener`, `get_screener_universe`, `get_screener_board`, `translate_screener`, `list_symbols`,
 `compare_symbols`. Sandbox keys (`ml_test_`) and production keys (`ml_live_`) both read the same

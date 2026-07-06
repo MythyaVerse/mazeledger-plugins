@@ -7,8 +7,8 @@
   "description": "MazeLedger plugins: screen crypto markets via the MazeLedger Screener API.",
   "plugins": [
     {
-      "name": "mazeledger-bots",
-      "source": "./plugins/mazeledger-bots",
+      "name": "mazeledger-screeners",
+      "source": "./plugins/mazeledger-screeners",
       "description": "Screen crypto markets in natural language via the MazeLedger Screener API. Bundles a skill + hosted MCP server: 65 curated screeners on real ZebPay futures and live spot data, read-only (market:read).",
       "version": "1.0.0",
       "author": { "name": "MazeLedger" }

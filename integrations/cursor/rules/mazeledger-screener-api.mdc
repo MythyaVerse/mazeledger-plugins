@@ -11,7 +11,7 @@ Read-only (scope `market:read`); it never places a trade.
 Base URL `https://mazeledger.ai`. Auth header `x-api-key` (`ml_test_` sandbox or `ml_live_`
 production).
 
-The `mazeledger-bots` MCP server (configured in `.cursor/mcp.json`) exposes tools: `list_screeners`,
+The `mazeledger-screeners` MCP server (configured in `.cursor/mcp.json`) exposes tools: `list_screeners`,
 `run_screener`, `get_screener_universe`, `get_screener_board`, `translate_screener`, `list_symbols`,
 `compare_symbols`. Sandbox and production keys both read the same live data; screeners are read-only
 either way.

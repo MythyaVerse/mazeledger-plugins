@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "mazeledger-bots": {
+    "mazeledger-screeners": {
       "url": "https://mazeledger.ai/api/v1/mcp",
       "headers": {
         "x-api-key": "${env:MAZELEDGER_API_KEY}"

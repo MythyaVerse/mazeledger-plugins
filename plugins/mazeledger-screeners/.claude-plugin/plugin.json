@@ -1,5 +1,5 @@
 {
-  "name": "mazeledger-bots",
+  "name": "mazeledger-screeners",
   "displayName": "MazeLedger Screeners",
   "version": "1.0.0",
   "description": "Screen crypto markets in natural language via the MazeLedger Screener API. Bundles a skill + hosted MCP server: 65 curated screeners on real ZebPay futures and live spot data, read-only (market:read).",

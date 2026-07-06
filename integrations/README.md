@@ -2,13 +2,13 @@
 
 Screen crypto markets across 65 curated screeners on real ZebPay futures and live spot market data
 (via the [MazeLedger Screener API](https://mazeledger.ai/docs)) from any major AI coding client.
-Each integration = the **MCP server** (`mazeledger-bots`) + an **instructions file** (the "skill").
+Each integration = the **MCP server** (`mazeledger-screeners`) + an **instructions file** (the "skill").
 Read-only (scope `market:read`); it never places a trade. Same API key works across all of them:
 `ml_test_` (sandbox) or `ml_live_` (production), both read the same live data.
 
 | Client | MCP config | Instructions | Auth | Folder |
 |--------|-----------|--------------|------|--------|
-| **Claude Code** | plugin `.mcp.json` (auto, prompts for key) | bundled Skill | `x-api-key` header | [`../plugins/mazeledger-bots`](../plugins/mazeledger-bots) |
+| **Claude Code** | plugin `.mcp.json` (auto, prompts for key) | bundled Skill | `x-api-key` header | [`../plugins/mazeledger-screeners`](../plugins/mazeledger-screeners) |
 | **Cursor** | `.cursor/mcp.json` (`url` + `x-api-key` header) | `.cursor/rules/*.mdc` | `x-api-key` header (`${env:...}`) | [`cursor/`](./cursor) |
 | **Codex** | `~/.codex/config.toml` (`url` + `bearer_token_env_var`) | `AGENTS.md` | `Authorization: Bearer` (env var) | [`codex/`](./codex) |
 
