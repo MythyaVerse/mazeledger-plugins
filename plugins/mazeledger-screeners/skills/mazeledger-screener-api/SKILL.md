@@ -52,7 +52,7 @@ All modes return a normalized `ScreenerRunResult { mode, status, matchedCount, m
 
 ## Futures
 
-Pass `market=futures` to screen ZebPay perpetual futures. Technical and open-interest screeners run on real ZebPay futures candles; funding-rate, long/short-ratio, and basis run live. Candles are fetched live at scan time, so a futures signal reflects a bar close within tens of seconds. Per-coin coverage is in the universe's `sourceFamilies[]` / `candleCoverage`: liquid coins are always live; newer coins still building ~1yr history are reported pending, never faked. A screen returns `status:"data_unavailable"` only when nothing is covered.
+Pass `market=futures` to screen ZebPay perpetual futures. Technical and open-interest screeners run on ZebPay futures OHLCV where covered (the liquid priority set) and Binance-derived data otherwise; funding-rate, long/short-ratio, and basis run live from OKX. Candles are fetched live at scan time, so a futures signal reflects a bar close within tens of seconds. Per-coin coverage is in the universe's `sourceFamilies[]` / `candleCoverage`: liquid coins are always live; newer coins still building ~1yr history are reported pending, never faked. A screen returns `status:"data_unavailable"` only when nothing is covered.
 
 ## Bulk board and natural language
 
