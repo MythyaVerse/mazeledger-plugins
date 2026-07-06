@@ -1,17 +1,17 @@
 {
   "name": "mazeledger-bots",
-  "displayName": "MazeLedger Bots",
+  "displayName": "MazeLedger Screeners",
   "version": "1.0.0",
-  "description": "Build spot & futures trading bots via the MazeLedger API. Bundles a skill + hosted MCP server so you can onboard, register end-users (BYO keys), and place & manage orders in natural language.",
+  "description": "Screen crypto markets in natural language via the MazeLedger Screener API. Bundles a skill + hosted MCP server: 65 curated screeners on real ZebPay futures and live spot data, read-only (market:read).",
   "author": { "name": "MazeLedger", "email": "contact@mazeledger.ai" },
   "homepage": "https://mazeledger.ai/docs",
   "license": "MIT",
-  "keywords": ["trading", "bots", "crypto", "futures", "spot", "zebpay", "mcp", "execution"],
+  "keywords": ["screener", "crypto", "futures", "spot", "zebpay", "mcp", "market-data", "technical-analysis"],
   "userConfig": {
     "api_key": {
       "type": "string",
       "title": "MazeLedger API Key",
-      "description": "Your MazeLedger org API key — ml_test_… (sandbox, simulated, free) or ml_live_… (real orders). Get one from https://mazeledger.ai/docs.",
+      "description": "Your MazeLedger org API key (scope market:read). Use ml_test_ (sandbox) or ml_live_ (production). Get one from https://mazeledger.ai/docs.",
       "sensitive": true,
       "required": true
     },

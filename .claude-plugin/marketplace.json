@@ -4,12 +4,12 @@
     "name": "MazeLedger",
     "email": "contact@mazeledger.ai"
   },
-  "description": "MazeLedger plugins — build spot & futures trading bots via the MazeLedger API.",
+  "description": "MazeLedger plugins: screen crypto markets via the MazeLedger Screener API.",
   "plugins": [
     {
       "name": "mazeledger-bots",
       "source": "./plugins/mazeledger-bots",
-      "description": "Build spot & futures trading bots via the MazeLedger API. Bundles a skill + hosted MCP server: onboard, register end-users (BYO keys), place & manage orders in natural language.",
+      "description": "Screen crypto markets in natural language via the MazeLedger Screener API. Bundles a skill + hosted MCP server: 65 curated screeners on real ZebPay futures and live spot data, read-only (market:read).",
       "version": "1.0.0",
       "author": { "name": "MazeLedger" }
     }

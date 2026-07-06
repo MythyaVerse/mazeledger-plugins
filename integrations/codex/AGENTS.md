@@ -1,45 +1,64 @@
-# MazeLedger Bot Trading API (for Codex)
+# MazeLedger Screener API (for Codex)
 
 > Add this content to your project's `AGENTS.md` (or `~/.codex/AGENTS.md`) so Codex knows how to use
-> the MazeLedger Bot Trading API + the `mazeledger-bots` MCP server.
+> the MazeLedger Screener API + the `mazeledger-bots` MCP server.
 
-Build trading bots that place **spot (INR)** and **futures (USDT-M)** orders via the MazeLedger API. You write the
-bot logic; MazeLedger handles execution, risk caps, idempotency, audit, and a sandbox. Each end-user
-brings their **own ZebPay keys (BYO)** — no custody.
+Screen crypto markets across 65 curated screeners on real ZebPay futures and live spot market data.
+Read-only (scope `market:read`); it never places a trade.
 
-Base URL `https://mazeledger.ai` · Auth via the `mazeledger-bots` MCP server (configured in
-`~/.codex/config.toml`, authenticated with `MAZELEDGER_API_KEY`). MCP tools: `list_symbols`,
-`get_account`, `get_positions`, `place_futures_order`, `close_position`. Sandbox key (`ml_test_…`)
-simulates; live key (`ml_live_…`) places real orders.
+Base URL `https://mazeledger.ai`. Auth via the `mazeledger-bots` MCP server (configured in
+`~/.codex/config.toml`, authenticated with `MAZELEDGER_API_KEY`). MCP tools: `list_screeners`,
+`run_screener`, `get_screener_universe`, `get_screener_board`, `translate_screener`, `list_symbols`,
+`compare_symbols`. Sandbox keys (`ml_test_`) and production keys (`ml_live_`) both read the same
+live data; screeners are read-only either way.
 
 ## Get a key (one-time)
 ```
-POST /api/v1/onboarding/organizations { "name": "Acme", "country": "IN" }   -> sandbox key (once)
-POST /api/v1/organizations/{id}/exchange-connections { "apiKey": "...", "apiSecret": "..." }
-POST /api/v1/organizations/{id}/risk-acknowledgment { "acknowledge": true }
-POST /api/v1/organizations/{id}/api-keys { "mode": "live" }                  -> live key
+POST /api/v1/onboarding/organizations { "name": "Acme", "country": "IN" }
+   -> first sandbox key (ml_test_), scope market:read
+```
+Set the key as the `MAZELEDGER_API_KEY` env var (used by `~/.codex/config.toml`). For an evaluation
+key, email contact@mazeledger.ai.
+
+## Discover, then run
+Read the catalog once; it lists every screener and every parameter you can send.
+
+```
+GET  /api/v1/screener/catalog                        # 65 named definitions, 12 manual dimensions, raw filter spec, thresholds, limits
+GET  /api/v1/screener/universe?market=spot|futures   # supported coins + coverage (futures: sourceFamilies[] / candleCoverage)
 ```
 
-## End-users
-`POST /api/v1/users { externalUserId, apiKey, apiSecret }`, then pass `endUserId` on trading calls.
+Run a screener three ways. Provide exactly ONE of `definition` / `manualFilters` / `filters`:
+
+```
+GET  /api/v1/screener/run?definition=rsi-oversold&market=futures&timeframe=1h&top=20
+POST /api/v1/screener/run  { "definition": "rsi-oversold", "market": "futures", "timeframe": "1h", "top": 20 }
+POST /api/v1/screener/run  { "manualFilters": [{"dimension":"RSI (14)","value":"Oversold (< 30)","logic":"RSI(14) < 30"}], "market": "futures" }
+POST /api/v1/screener/run  { "filters": { "rsiBelow": 30, "adxAbove": 25, "bb": "squeeze" }, "market": "futures" }   # full per-coin technical panel under "indicators"
+```
+
+All modes return a normalized `ScreenerRunResult { mode, status, matchedCount, matches:[{symbol,pair,last,metric,signal,indicators?}], blockers[], disclaimer }`. Every response carries a not-advice `disclaimer`. Timeframes: `5m / 15m / 1h / 4h / 1D / 1W`.
 
 ## Futures
-`POST /api/v1/futures/orders { endUserId?, symbol, side, notionalUsd|quantity, leverage, type, clientOrderId }`;
-`GET /futures/orders/{id}`, `/futures/positions`, `POST /futures/positions/{id}/close`, `/futures/account`,
-`/exchange/symbols?symbol=`.
+Pass `market=futures` to screen ZebPay perpetual futures. Technical and open-interest screeners run
+on real ZebPay futures candles; funding-rate, long/short-ratio, and basis run live. Candles are
+fetched live at scan time, so a futures signal reflects a bar close within tens of seconds. Per-coin
+coverage is in the universe's `sourceFamilies[]` / `candleCoverage`: liquid coins are always live;
+newer coins still building ~1yr history are reported pending, never faked. A screen returns
+`status:"data_unavailable"` only when nothing is covered.
 
-## Spot (INR; ₹99 min)
-`POST /api/v1/spot/orders { endUserId?, symbol, side:"buy", amountInr }` (buy) or `{ side:"sell", quantity }`;
-`GET /spot/orders/{id}`, `/spot/account`.
+## Bulk board and natural language
+```
+GET  /api/v1/screener/board?market=futures&timeframe=1h&top=5     # every Live screener's matches in ONE cached pull
+POST /api/v1/screener/translate { "prompt": "oversold coins on the daily", "market": "futures" }   # NL -> validated query -> runs it
+```
 
-## Reporting
-`GET /api/v1/orders?externalUserId=&status=`, `/users/{externalUserId}/orders`, `/stats`.
+MCP equivalents: `get_screener_board`, `translate_screener`.
 
-## Building a bot
-Decide → size (`list_symbols`/`get_account`) → place with a stable `clientOrderId` (idempotent) →
-track (`get_positions`/`/orders`) → `close_position`. Ideas: DCA, grid, TP/SL, copy-trading.
+## Push (do not poll)
+Register a webhook endpoint (`POST /api/v1/organizations/{id}/webhook-endpoints` `{ url, events:["screener.snapshot"] }`) and a signed board snapshot is POSTed about every 15 minutes. Verify the `x-mazeledger-signature` HMAC (`sha256` of `timestamp` + `.` + `body`).
 
 ## Safety
-Sandbox first. Per-org risk caps + exchange minimums → `422 RISK_CAP_REJECTED`. Idempotency via
-`clientOrderId`; ambiguous failures recorded `unknown` (re-query before retry). BYO keys trade-only.
-Full docs: `https://mazeledger.ai/docs`.
+Read-only. The screener API never places an order; it needs only the `market:read` scope. Every
+match is a candidate, not advice; each response carries a `disclaimer`. Full docs:
+`https://mazeledger.ai/docs`.
