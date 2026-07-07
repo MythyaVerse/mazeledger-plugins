@@ -34,7 +34,8 @@ Run a screener three ways. Provide exactly ONE of `definition` / `manualFilters`
 ```
 GET  /api/v1/screener/run?definition=rsi-oversold&market=futures&timeframe=1h&top=20
 POST /api/v1/screener/run  { "definition": "rsi-oversold", "market": "futures", "timeframe": "1h", "top": 20 }
-POST /api/v1/screener/run  { "manualFilters": [{"dimension":"RSI (14)","value":"Oversold (< 30)","logic":"RSI(14) < 30"}], "market": "futures" }
+POST /api/v1/screener/run  { "manualFilters": [{"dimension":"RSI (14)","value":"Oversold (< 30)"}], "market": "futures" }
+POST /api/v1/screener/run  { "manualFilters": [{"dimension":"Long / Short ratio","value":"Long-heavy"},{"dimension":"Funding rate","value":"Positive"}], "market": "futures" }
 POST /api/v1/screener/run  { "filters": { "rsiBelow": 30, "adxAbove": 25, "bb": "squeeze" }, "market": "futures" }   # full per-coin technical panel under "indicators"
 ```
 
